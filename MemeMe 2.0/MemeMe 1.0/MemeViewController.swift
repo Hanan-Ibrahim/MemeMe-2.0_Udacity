@@ -138,10 +138,12 @@ class MemeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         let memedImage = generateMemedImage()
         let activityController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
         activityController.completionWithItemsHandler = { activity, success, items, error in
+            if success {
+            // do not save if activity is cancelled
             self.save()
             self.dismiss(animated: true, completion: nil)
+            }
         }
-        
         present(activityController, animated: true, completion: nil)
         
     }
